@@ -10,10 +10,46 @@ def test_construct_cmd():
     test3 = construct_cmd("share")
     test4 = construct_cmd("file")
 
-    assert test1 == ["az", "storage", "container", "list", "--query", "[*].name", "-o", "tsv"]
-    assert test2 == ["az", "storage", "blob", "list", "--query", "[*].name", "-o", "tsv"]
-    assert test3 == ["az", "storage", "share", "list", "--query", "[*].name", "-o", "tsv"]
-    assert test4 == ["az", "storage", "file", "list", "--query", "[*].name", "-o", "tsv"]
+    assert test1 == [
+        "az",
+        "storage",
+        "container",
+        "list",
+        "--query",
+        "[*].name",
+        "-o",
+        "tsv",
+    ]
+    assert test2 == [
+        "az",
+        "storage",
+        "blob",
+        "list",
+        "--query",
+        "[*].name",
+        "-o",
+        "tsv",
+    ]
+    assert test3 == [
+        "az",
+        "storage",
+        "share",
+        "list",
+        "--query",
+        "[*].name",
+        "-o",
+        "tsv",
+    ]
+    assert test4 == [
+        "az",
+        "storage",
+        "file",
+        "list",
+        "--query",
+        "[*].name",
+        "-o",
+        "tsv",
+    ]
 
     with pytest.raises(ValueError):
         construct_cmd("banana")
