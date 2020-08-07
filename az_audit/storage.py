@@ -73,13 +73,8 @@ def construct_cmd(type: str) -> list:
     return ["az", "storage", type, "list", "--query", "[*].name", "-o", "tsv"]
 
 
-def login(subscription: str) -> None:
-    """Login to Azure account and set active subscription.
-
-    Args:
-        subscription (str, optional): The subscription to activate. Can be a
-                                      name or the ID (hex string) of the sub.
-    """
+def login() -> None:
+    """Login to Azure account and set active subscription."""
     print("Please prove the login credentials to your Turing Azure account")
 
     if "EMAIL" in os.environ:
