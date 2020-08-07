@@ -73,13 +73,12 @@ def construct_cmd(type: str) -> list:
     return ["az", "storage", type, "list", "--query", "[*].name", "-o", "tsv"]
 
 
-def login(subscription: str = "Living with Machines") -> None:
+def login(subscription: str) -> None:
     """Login to Azure account and set active subscription.
 
     Args:
         subscription (str, optional): The subscription to activate. Can be a
                                       name or the ID (hex string) of the sub.
-                                      Defaults to "Living with Machines".
     """
     print("Please prove the login credentials to your Turing Azure account")
 
@@ -93,6 +92,8 @@ def login(subscription: str = "Living with Machines") -> None:
     login_cmd = ["az", "login", "-u", email, "-p", password, "-o", "none"]
     run_cmd(login_cmd)
     print("Successfully logged into Azure")
+
+    subscription = input("Please provide a subscription name or hex-string: ")
 
     sub_cmd = ["az", "account", "set", "-s", f"{subscription}"]
     run_cmd(sub_cmd)
