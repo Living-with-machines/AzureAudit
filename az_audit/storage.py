@@ -23,7 +23,9 @@ def list_all_storage_accounts() -> list:
 
     accounts = []
     for item in data:
-        selector = [keyword not in item["resourceGroup"] for keyword in RG_KEYWORDS]
+        selector = [
+            keyword not in item["resourceGroup"] for keyword in RG_KEYWORDS
+        ]  # noqa: E501
 
         if all(selector):
             entry = {"name": item["name"], "id": item["id"]}
@@ -52,7 +54,12 @@ def generate_sas_token(account: dict) -> str:
     expiry = create_timestamp()
 
     possible_services = ["b", "f", "q", "t"]
-    exists = [account["blob"], account["file"], account["queue"], account["table"]]
+    exists = [
+        account["blob"],
+        account["file"],
+        account["queue"],
+        account["table"],
+    ]  # noqa: E501
     services = "".join(list(compress(possible_services, exists)))
 
     generate_cmd = [
@@ -124,7 +131,13 @@ def get_objects(account_name: str, sas_token: str, type: str) -> dict:
     elif type == "share":
         cmd = construct_cmd("file")
         cmd.extend(
-            ["--account-name", account_name, "--sas-token", sas_token, "--share-name"]
+            [
+                "--account-name",
+                account_name,
+                "--sas-token",
+                sas_token,
+                "--share-name",
+            ]  # noqa: E501
         )
 
     for object in pulled:
@@ -164,7 +177,7 @@ def list_objects(account: dict) -> Tuple[dict, dict]:
     if account["queue"] or account["table"]:
         # TODO: Implement table and queue storage listing
         warnings.warn(
-            "Not Implemented: The code to access queue or table type storage is currently not implemented"
+            "Not Implemented: The code to access queue or table type storage is currently not implemented"  # noqa: E501
         )
 
     return blobs, files

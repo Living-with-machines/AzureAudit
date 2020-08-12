@@ -17,7 +17,7 @@ def construct_cmd(type: str) -> list:
     valid_types = ["container", "blob", "share", "file"]
     if type not in valid_types:
         raise ValueError(
-            f"Type {type} is not a valid input. Please provide one of the following inputs: {valid_types}"
+            f"Type {type} is not a valid input. Please provide one of the following inputs: {valid_types}"  # noqa: E501
         )
 
     return ["az", "storage", type, "list", "--query", "[*].name", "-o", "tsv"]
@@ -35,7 +35,9 @@ def create_timestamp(timedelta_minutes: int = 30) -> str:
     Returns:
         str: Unix-based timestamp
     """
-    future = datetime.datetime.utcnow() + datetime.timedelta(minutes=timedelta_minutes)
+    future = datetime.datetime.utcnow() + datetime.timedelta(
+        minutes=timedelta_minutes
+    )  # noqa: E501
     timestamp = future.isoformat(timespec="minutes")
     return timestamp + "Z"
 
@@ -49,7 +51,9 @@ def run_cmd(cmd: list) -> dict:
     Returns:
         dict: The result of the command
     """
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )  # noqa: E501
 
     msgs = proc.communicate()
 

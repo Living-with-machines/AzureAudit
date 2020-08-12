@@ -1,14 +1,17 @@
-import pytest
 from unittest.mock import call, patch
 
-from az_audit.storage import generate_sas_token, get_objects, list_all_storage_accounts
+from az_audit.storage import (
+    generate_sas_token,
+    get_objects,
+    list_all_storage_accounts,
+)  # noqa: E501
 
 
 @patch(
     "az_audit.storage.run_cmd",
     return_value={
         "returncode": 0,
-        "output": '[{"resourceGroup": "cloud-shell-storage"}, {"resourceGroup": "playground"}, {"resourceGroup": "experimental"}, {"resourceGroup": "learnazure"}, {"resourceGroup": "res_grp", "name": "storageaccount", "id": "some_id", "encryption": {"services": {"blob": {"enabled": true}, "file": {"enabled": true}, "queue": null, "table": null}}}]',
+        "output": '[{"resourceGroup": "cloud-shell-storage"}, {"resourceGroup": "playground"}, {"resourceGroup": "experimental"}, {"resourceGroup": "learnazure"}, {"resourceGroup": "res_grp", "name": "storageaccount", "id": "some_id", "encryption": {"services": {"blob": {"enabled": true}, "file": {"enabled": true}, "queue": null, "table": null}}}]',  # noqa: E501
         "err_msg": "",
     },
 )
@@ -16,7 +19,9 @@ def test_list_all_storage_accounts(mock):
     output = list_all_storage_accounts()
 
     mock.assert_called_once()
-    mock.assert_called_once_with(["az", "storage", "account", "list", "-o", "json"])
+    mock.assert_called_once_with(
+        ["az", "storage", "account", "list", "-o", "json"]
+    )  # noqa: E501
 
     assert output == [
         {
@@ -78,7 +83,9 @@ def test_generate_sas_token():
         assert output == "this_is_a_sas_token"
 
 
-@patch("az_audit.storage.run_cmd", return_value={"returncode": 0, "output": ""})
+@patch(
+    "az_audit.storage.run_cmd", return_value={"returncode": 0, "output": ""}
+)  # noqa: E501
 def test_get_objects_short(mock):
     account_name = "test_account"
     sas_token = "this_is_a_sas_token"
