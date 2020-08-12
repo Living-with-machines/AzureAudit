@@ -2,7 +2,6 @@ import io
 import os
 
 from setuptools import find_packages, setup
-from distutils.extension import Extension
 
 # Package meta-data.
 AUTHOR = "Sarah Gibson"
@@ -72,15 +71,13 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(
-        exclude=["tests", "*.tests", "*.tests.*", "tests.*"]
-    ),
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
     license=LICENSE,
     ext_modules=[],
-    entry_points={},
+    entry_points={"console_scripts": ["az-audit = az_audit.cli:main"]},
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
