@@ -183,9 +183,9 @@ def list_objects(account: dict) -> Tuple[dict, dict]:
     return blobs, files
 
 
-def main():
+def main(subscription: str):
     """Main function"""
-    login()
+    login(subscription)
     accounts = list_all_storage_accounts()
     print(f"Number of storage accounts: {len(accounts)}")
 
