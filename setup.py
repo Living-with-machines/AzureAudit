@@ -17,8 +17,7 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = []
 
-# When these are changed, update clevercsv/_optional.py accordingly
-full_require = []
+full_require = REQUIRED + []
 
 docs_require = []
 test_require = full_require + [
