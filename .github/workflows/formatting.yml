@@ -25,6 +25,6 @@ jobs:
           black --check .
 
       - name: Lint with flake8
-        if: succeeded() || failed()  # Always run this step, even if black fails
+        if: ${{ always() }}  # Always run this step, even if black fails
         run: |
           flake8 .
