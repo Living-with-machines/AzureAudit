@@ -20,9 +20,11 @@ help:
 .PHONY: install develop
 
 install: ## Install for the current user using the default python command
+	python -m pip install -r requirements.txt
 	python setup.py install --user
 
 develop: ## Install in editable mode using pip for development
+	python -m pip install -r requirements.txt
 	python -m pip install -e .
 
 ################
