@@ -27,4 +27,4 @@ jobs:
       - name: Lint with flake8
         if: ${{ always() }}  # Always run this step, even if black fails
         run: |
-          flake8 .
+          flake8 --ignore=E501,F401 .
