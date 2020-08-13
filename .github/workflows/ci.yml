@@ -1,12 +1,6 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   run-tests:
@@ -25,14 +19,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install package with dependencies
         run: |
-          python -m pip install -U pip
-          python -m pip install -r requirements.txt
+          make develop
 
       - name: Run tests
         run: |
-          python -m coverage run -m pytest -vvv
+          make tests
 
       - name: Generate coverage report
         run: |
